@@ -498,19 +498,21 @@ body{
 }
 
 /* ══════════════════════════════════════
-   SECTION 3 — DATE & VENUE
+   CELEBRATION — combined section
 ══════════════════════════════════════ */
-#date-section{
+#celebration{
   background:var(--cream);
   padding:clamp(80px,12vh,140px) clamp(24px,6vw,80px);
   text-align:center;
   position:relative;overflow:hidden;
 }
-.date-eyebrow{
+#fw-canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:3;}
+
+.cel-eyebrow{
   font-size:.65rem;letter-spacing:.26em;text-transform:uppercase;
-  color:var(--bark);margin-bottom:clamp(20px,4vh,36px);
+  color:var(--bark);margin-bottom:clamp(12px,2vh,20px);
 }
-.date-main{
+.cel-date{
   font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;
   font-size:clamp(2.4rem,8vw,6rem);
   color:var(--text);line-height:1;
@@ -520,7 +522,7 @@ body{
 .countdown{
   display:flex;align-items:flex-start;justify-content:center;
   gap:clamp(20px,5vw,56px);
-  margin-bottom:clamp(48px,8vh,80px);
+  margin-bottom:clamp(60px,10vh,100px);
 }
 .cd-unit{display:flex;flex-direction:column;align-items:center;gap:6px}
 .cd-num{
@@ -528,237 +530,99 @@ body{
   font-size:clamp(2rem,6vw,4rem);
   color:var(--text);line-height:1;min-width:2ch;text-align:center;
 }
-.cd-label{
-  font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;
-  color:var(--bark);
-}
+.cd-label{font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--bark);}
 .cd-sep{
   font-family:'Cormorant Garamond',serif;
   font-size:clamp(2rem,5vw,3.5rem);
-  color:var(--stone);
-  line-height:1;padding-top:4px;
+  color:var(--stone);line-height:1;padding-top:4px;
 }
 
-.venue-block{
-  max-width:560px;margin:0 auto;
+/* ── Event cards ── */
+.event-cards{
+  display:flex;flex-direction:column;
+  gap:clamp(14px,2.5vw,20px);
+  max-width:560px;margin:0 auto clamp(40px,7vh,64px);
 }
-.venue-img-wrap{
-  width:100%;
-  aspect-ratio:16/9;
-  border-radius:4px;overflow:hidden;
-  margin-bottom:clamp(20px,3vh,32px);
-  background:var(--stone);
+.event-card{
+  position:relative;border-radius:6px;overflow:hidden;
+  cursor:pointer;
+  box-shadow:0 4px 24px rgba(28,21,16,.10);
+  transition:transform .35s ease,box-shadow .35s ease;
 }
-.venue-img-wrap img{width:100%;height:100%;object-fit:cover;display:block}
-.venue-name{
+.event-card:hover{transform:translateY(-4px);box-shadow:0 14px 44px rgba(28,21,16,.18);}
+.event-card-img{width:100%;aspect-ratio:16/9;overflow:hidden;background:var(--stone);}
+.event-card-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease;}
+.event-card:hover .event-card-img img{transform:scale(1.04)}
+.event-card-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(28,21,16,.82) 0%,rgba(28,21,16,.28) 55%,rgba(28,21,16,.02) 100%);
+  pointer-events:none;
+}
+.event-card-body{
+  position:absolute;bottom:0;left:0;right:0;
+  padding:clamp(14px,3vw,26px);
+  display:flex;align-items:flex-end;justify-content:space-between;gap:12px;
+}
+.event-card-info{text-align:left;}
+.event-card-type{
+  font-size:.57rem;letter-spacing:.24em;text-transform:uppercase;
+  color:rgba(250,247,242,.6);margin-bottom:3px;
+}
+.event-card-title{
   font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:400;
-  font-size:clamp(1.2rem,3vw,1.8rem);
-  color:var(--text);margin-bottom:8px;
+  font-size:clamp(1.15rem,4vw,1.65rem);
+  color:var(--cream);line-height:1.1;margin-bottom:3px;
 }
-.venue-addr{
-  font-size:.8rem;letter-spacing:.08em;
-  color:var(--text2);text-decoration:none;
-  border-bottom:1px solid rgba(122,98,72,.25);
-  padding-bottom:2px;transition:color .2s,border-color .2s;
+.event-card-time{
+  font-size:.7rem;letter-spacing:.12em;color:rgba(250,247,242,.65);
 }
-.venue-addr:hover{color:var(--text);border-color:var(--brown)}
+.event-card-cta{
+  flex-shrink:0;
+  width:40px;height:40px;border-radius:50%;
+  background:rgba(250,247,242,.14);border:1px solid rgba(250,247,242,.3);
+  color:var(--cream);font-size:18px;
+  display:flex;align-items:center;justify-content:center;
+  transition:background .25s,border-color .25s;
+  backdrop-filter:blur(4px);
+}
+.event-card:hover .event-card-cta{background:rgba(250,247,242,.28);border-color:rgba(250,247,242,.55);}
 
-#fw-canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:3;}
-
-.date-rsvp-wrap{
-  margin-top:clamp(40px,7vh,64px);
-  display:flex;flex-direction:column;align-items:center;gap:12px;
+/* ── Gift block ── */
+.gift-block{
+  max-width:420px;margin:0 auto clamp(48px,8vh,80px);
+  background:var(--cream2);border:1px solid var(--stone);
+  border-radius:6px;padding:clamp(24px,4vw,40px);
+  cursor:pointer;transition:transform .3s,box-shadow .3s;
+  text-align:center;
 }
+.gift-block:hover{transform:translateY(-3px);box-shadow:0 12px 36px rgba(28,21,16,.1);}
+.gift-icon{font-size:2rem;margin-bottom:12px;display:block;}
+.gift-title{
+  font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:400;
+  font-size:clamp(1.2rem,3vw,1.6rem);color:var(--text);margin-bottom:8px;
+}
+.gift-desc{font-size:clamp(.82rem,1.6vw,.92rem);color:var(--text2);line-height:1.7;margin-bottom:16px;}
+.gift-link{
+  font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--brown);
+  display:inline-flex;align-items:center;gap:5px;
+  border-bottom:1px solid rgba(122,98,72,.3);padding-bottom:2px;transition:color .2s;
+}
+.gift-block:hover .gift-link{color:var(--text)}
+
+/* ── RSVP wrap ── */
+.cel-rsvp-wrap{display:flex;flex-direction:column;align-items:center;gap:14px;}
+
 .btn-primary{
   display:inline-block;
   background:var(--text);color:var(--cream);
-  padding:14px 40px;
-  font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;
+  padding:16px 48px;
+  font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;
   text-decoration:none;border-radius:2px;
   transition:background .25s,color .25s;
+  border:none;cursor:pointer;font-family:'Jost',sans-serif;font-weight:300;
 }
 .btn-primary:hover{background:var(--brown)}
-.rsvp-deadline{
-  font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;
-  color:var(--bark);
-}
-
-/* ══════════════════════════════════════
-   SECTION 4 — DETAILS GRID
-══════════════════════════════════════ */
-#details{
-  padding:clamp(80px,12vh,140px) clamp(24px,6vw,80px);
-  background:var(--cream);
-}
-.section-eyebrow{
-  font-size:.65rem;letter-spacing:.26em;text-transform:uppercase;
-  color:var(--bark);text-align:center;
-  margin-bottom:clamp(10px,2vh,16px);
-}
-.section-title{
-  font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;
-  font-size:clamp(1.8rem,4.5vw,3rem);
-  color:var(--text);text-align:center;
-  margin-bottom:clamp(12px,2vh,18px);
-}
-.section-subtitle{
-  text-align:center;
-  font-size:clamp(.88rem,1.6vw,.98rem);
-  color:var(--text2);max-width:480px;margin:0 auto;
-  margin-bottom:clamp(40px,7vh,72px);
-}
-.details-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));
-  gap:clamp(16px,3vw,28px);
-  max-width:1100px;margin:0 auto;
-}
-.detail-card{
-  border-radius:4px;overflow:hidden;
-  background:var(--cream2);
-  border:1px solid var(--stone);
-  cursor:pointer;transition:transform .3s,box-shadow .3s;
-}
-.detail-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(28,21,16,.1)}
-.detail-card-img{
-  width:100%;aspect-ratio:4/3;overflow:hidden;
-  background:var(--stone);
-}
-.detail-card-img img{width:100%;height:100%;object-fit:cover;display:block;
-  transition:transform .5s ease}
-.detail-card:hover .detail-card-img img{transform:scale(1.04)}
-.detail-card-body{padding:clamp(16px,3vw,24px)}
-.detail-card-title{
-  font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:400;
-  font-size:clamp(1.1rem,2.5vw,1.4rem);
-  color:var(--text);margin-bottom:6px;
-}
-.detail-card-desc{
-  font-size:.82rem;color:var(--text2);line-height:1.65;
-}
-.detail-card-link{
-  display:inline-flex;align-items:center;gap:5px;
-  font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;
-  color:var(--brown);margin-top:12px;text-decoration:none;
-  border-bottom:1px solid rgba(122,98,72,.3);padding-bottom:2px;
-  transition:color .2s;
-}
-.detail-card-link:hover{color:var(--text)}
-
-.details-prose{
-  max-width:660px;margin:clamp(48px,7vh,72px) auto 0;
-  text-align:center;
-  font-family:'Cormorant Garamond',serif;font-style:italic;
-  font-size:clamp(1rem,2.2vw,1.2rem);
-  color:var(--text2);line-height:1.8;
-}
-
-/* ══════════════════════════════════════
-   SECTION 5 — FAQ
-══════════════════════════════════════ */
-#faq{
-  padding:clamp(80px,12vh,130px) clamp(24px,6vw,80px);
-  background:var(--cream2);
-}
-.faq-wrap{
-  max-width:720px;margin:0 auto;
-}
-.faq-contact{
-  text-align:center;
-  font-size:.82rem;color:var(--text2);
-  margin-bottom:clamp(32px,5vh,48px);
-}
-.faq-contact a{color:var(--brown);text-decoration:none;border-bottom:1px solid rgba(122,98,72,.3)}
-.faq-item{
-  border-top:1px solid var(--stone);
-}
-.faq-item:last-child{border-bottom:1px solid var(--stone)}
-.faq-q{
-  width:100%;background:none;border:none;cursor:pointer;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:clamp(16px,2.5vh,22px) 0;
-  text-align:left;gap:16px;
-}
-.faq-q-text{
-  font-family:'Cormorant Garamond',serif;font-weight:400;
-  font-size:clamp(.95rem,2vw,1.1rem);
-  color:var(--text);line-height:1.4;
-}
-.faq-icon{
-  flex-shrink:0;width:18px;height:18px;
-  border:1px solid var(--stone);border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  transition:transform .35s,background .25s;
-}
-.faq-icon::before{
-  content:'';display:block;
-  width:8px;height:1px;background:var(--text2);
-  box-shadow:0 -3px 0 var(--text2),0 3px 0 var(--text2);
-  transition:box-shadow .3s;
-}
-.faq-item.open .faq-icon{transform:rotate(45deg);background:var(--text);border-color:var(--text)}
-.faq-item.open .faq-icon::before{box-shadow:none;background:var(--cream)}
-.faq-a{
-  max-height:0;overflow:hidden;
-  transition:max-height .4s ease,padding .35s ease;
-}
-.faq-a-inner{
-  padding-bottom:clamp(16px,2.5vh,22px);
-  font-size:clamp(.84rem,1.6vw,.96rem);
-  color:var(--text2);line-height:1.8;
-}
-.faq-item.open .faq-a{max-height:400px}
-
-/* ══════════════════════════════════════
-   SECTION 6 — CEREMONY & RECEPTION VENUES
-══════════════════════════════════════ */
-#venues{
-  padding:clamp(80px,12vh,130px) clamp(24px,6vw,80px);
-  background:var(--cream);
-}
-.venues-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(min(100%,420px),1fr));
-  gap:clamp(24px,4vw,40px);
-  max-width:960px;margin:clamp(40px,6vh,60px) auto 0;
-}
-.venue-card{
-  background:var(--cream2);
-  border:1px solid var(--stone);
-  border-radius:4px;overflow:hidden;
-}
-.venue-card-img{
-  width:100%;aspect-ratio:16/9;overflow:hidden;background:var(--stone);
-}
-.venue-card-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s}
-.venue-card:hover .venue-card-img img{transform:scale(1.04)}
-.venue-card-body{padding:clamp(20px,4vw,32px)}
-.venue-type{
-  font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;
-  color:var(--bark);margin-bottom:8px;
-}
-.venue-title{
-  font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:400;
-  font-size:clamp(1.2rem,3vw,1.7rem);
-  color:var(--text);margin-bottom:4px;
-}
-.venue-time-str{
-  font-family:'Cormorant Garamond',serif;font-style:italic;
-  font-size:clamp(1.4rem,3vw,2rem);
-  color:var(--brown);margin-bottom:10px;
-}
-.venue-desc{
-  font-size:clamp(.84rem,1.6vw,.94rem);
-  color:var(--text2);line-height:1.75;margin-bottom:18px;
-}
-.btn-outline{
-  display:inline-flex;align-items:center;gap:7px;
-  padding:10px 20px;border-radius:2px;
-  font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;
-  color:var(--text);border:1px solid rgba(28,21,16,.25);
-  text-decoration:none;transition:background .2s,border-color .2s;
-}
-.btn-outline:hover{background:var(--text);color:var(--cream);border-color:var(--text)}
+.rsvp-deadline{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--bark);}
 
 /* ══════════════════════════════════════
    SECTION 7 — RSVP
@@ -1003,8 +867,7 @@ footer{
   <a class="nav-logo" href="#">M &amp; O</a>
   <div class="nav-links">
     <a href="#story-section" class="nav-hide">Our Story</a>
-    <a href="#details" class="nav-hide">Details</a>
-    <a href="#faq" class="nav-hide">FAQ</a>
+    <a href="#celebration" class="nav-hide">The Day</a>
     <a href="#rsvp-section" class="nav-rsvp">RSVP</a>
   </div>
 </nav>
@@ -1112,10 +975,11 @@ footer{
 
 </section>
 
-<!-- ══ SECTION 3: DATE + VENUE ══ -->
-<section id="date-section">
-  <p class="date-eyebrow reveal">so please join us...</p>
-  <p class="date-main reveal reveal-delay-1">august 9, 2026</p>
+<!-- ══ CELEBRATION: COUNTDOWN + VENUES + GIFT + RSVP ══ -->
+<section id="celebration">
+
+  <p class="cel-eyebrow reveal">so please join us...</p>
+  <p class="cel-date reveal reveal-delay-1">august 9, 2026</p>
 
   <div class="countdown reveal reveal-delay-2">
     <div class="cd-unit"><span class="cd-num" id="cd-d">0</span><span class="cd-label">Days</span></div>
@@ -1127,151 +991,57 @@ footer{
     <div class="cd-unit"><span class="cd-num" id="cd-s">0</span><span class="cd-label">Seconds</span></div>
   </div>
 
-  <div class="venue-block reveal reveal-delay-3">
-    <div class="venue-img-wrap">
-      <img src="images/ceremony.jpg" alt="Bkerke Church"/>
+  <!-- Two tappable event cards -->
+  <div class="event-cards reveal reveal-delay-3">
+
+    <!-- Ceremony -->
+    <div class="event-card" onclick="openModal('ceremony')">
+      <div class="event-card-img">
+        <img src="images/ceremony.jpg" alt="Bkerke Church"/>
+      </div>
+      <div class="event-card-overlay"></div>
+      <div class="event-card-body">
+        <div class="event-card-info">
+          <p class="event-card-type">The Ceremony</p>
+          <h3 class="event-card-title">Bkerke Church</h3>
+          <p class="event-card-time">6:00 PM · Tap for directions</p>
+        </div>
+        <div class="event-card-cta">📍</div>
+      </div>
     </div>
-    <p class="venue-name">Bkerke Church &amp; Le Royaume</p>
-    <a class="venue-addr" href="https://maps.google.com/?q=Bkerke+Church+Lebanon" target="_blank">Lebanon</a>
+
+    <!-- Reception -->
+    <div class="event-card" onclick="openModal('reception')">
+      <div class="event-card-img">
+        <img src="images/restaurant.jpg" alt="Le Royaume"/>
+      </div>
+      <div class="event-card-overlay"></div>
+      <div class="event-card-body">
+        <div class="event-card-info">
+          <p class="event-card-type">The Reception</p>
+          <h3 class="event-card-title">Le Royaume — Kleiaat</h3>
+          <p class="event-card-time">9:00 PM · Tap for directions</p>
+        </div>
+        <div class="event-card-cta">📍</div>
+      </div>
+    </div>
+
   </div>
 
-  <div class="date-rsvp-wrap reveal reveal-delay-4">
-    <a class="btn-primary" href="#rsvp-section">Submit RSVP</a>
+  <!-- Gift registry block -->
+  <div class="gift-block reveal reveal-delay-4" onclick="openModal('gift')">
+    <span class="gift-icon">✦</span>
+    <h3 class="gift-title">Gift Registry</h3>
+    <p class="gift-desc">Your presence is the greatest gift.<br/>For those who wish to celebrate further.</p>
+    <span class="gift-link">View details →</span>
+  </div>
+
+  <!-- RSVP button -->
+  <div class="cel-rsvp-wrap reveal reveal-delay-5">
+    <a class="btn-primary" href="#rsvp-section">Confirm your attendance</a>
     <p class="rsvp-deadline">RSVP by July 9, 2026</p>
   </div>
-</section>
 
-<!-- ══ SECTION 4: DETAILS ══ -->
-<section id="details">
-  <p class="section-eyebrow reveal">and now some additional details...</p>
-  <h2 class="section-title reveal reveal-delay-1">Everything you need to know</h2>
-  <p class="section-subtitle reveal reveal-delay-2">The people, places, and practical details that will make the day feel effortless.</p>
-
-  <div class="details-grid">
-    <div class="detail-card reveal reveal-delay-1" onclick="openModal('ceremony')">
-      <div class="detail-card-img"><img src="images/ceremony.jpg" alt="Ceremony"/></div>
-      <div class="detail-card-body">
-        <h3 class="detail-card-title">The Ceremony</h3>
-        <p class="detail-card-desc">Join us as we exchange our vows at Bkerke Church, surrounded by the people we love most.</p>
-        <span class="detail-card-link">Learn more →</span>
-      </div>
-    </div>
-    <div class="detail-card reveal reveal-delay-2" onclick="openModal('reception')">
-      <div class="detail-card-img"><img src="images/restaurant.jpg" alt="Reception"/></div>
-      <div class="detail-card-body">
-        <h3 class="detail-card-title">The Reception</h3>
-        <p class="detail-card-desc">Celebrate with us at Le Royaume — Kleiaat. Dinner, dancing, and memories that last a lifetime.</p>
-        <span class="detail-card-link">Learn more →</span>
-      </div>
-    </div>
-    <div class="detail-card reveal reveal-delay-3" onclick="openModal('dresscode')">
-      <div class="detail-card-img" style="background:var(--stone);display:flex;align-items:center;justify-content:center">
-        <span style="font-size:3rem;opacity:.3">✦</span>
-      </div>
-      <div class="detail-card-body">
-        <h3 class="detail-card-title">Dress Code</h3>
-        <p class="detail-card-desc">Elegant evening attire. Ladies in gowns or cocktail dresses; gentlemen in suits.</p>
-        <span class="detail-card-link">Learn more →</span>
-      </div>
-    </div>
-    <div class="detail-card reveal reveal-delay-4" onclick="openModal('gift')">
-      <div class="detail-card-img" style="background:var(--stone);display:flex;align-items:center;justify-content:center">
-        <span style="font-size:3rem;opacity:.3">✦</span>
-      </div>
-      <div class="detail-card-body">
-        <h3 class="detail-card-title">Gift Registry</h3>
-        <p class="detail-card-desc">Your presence is the greatest gift. For those who wish to celebrate with a gift.</p>
-        <span class="detail-card-link">Learn more →</span>
-      </div>
-    </div>
-  </div>
-
-  <p class="details-prose reveal">
-    The vision for the night is simple: all of our most beloved people in one place,
-    with a gorgeous setting, flowing drinks, and an unforgettable dance floor.
-  </p>
-</section>
-
-<!-- ══ SECTION 5: VENUES DETAIL ══ -->
-<section id="venues">
-  <p class="section-eyebrow reveal">where to be</p>
-  <h2 class="section-title reveal reveal-delay-1">The Celebration</h2>
-
-  <div class="venues-grid">
-    <div class="venue-card reveal reveal-delay-2">
-      <div class="venue-card-img"><img src="images/ceremony.jpg" alt="Ceremony venue"/></div>
-      <div class="venue-card-body">
-        <p class="venue-type">The Ceremony</p>
-        <h3 class="venue-title">Bkerke Church</h3>
-        <p class="venue-time-str">6:00 PM</p>
-        <p class="venue-desc">Join us as we exchange our vows and begin our journey as one, surrounded by the people we love most.</p>
-        <a class="btn-outline" href="https://maps.google.com/?q=Bkerke+Church+Lebanon" target="_blank">📍 Get Directions</a>
-      </div>
-    </div>
-    <div class="venue-card reveal reveal-delay-3">
-      <div class="venue-card-img"><img src="images/restaurant.jpg" alt="Reception venue"/></div>
-      <div class="venue-card-body">
-        <p class="venue-type">The Reception</p>
-        <h3 class="venue-title">Le Royaume — Kleiaat</h3>
-        <p class="venue-time-str">9:00 PM</p>
-        <p class="venue-desc">Celebrate with us as we dance, laugh, and make memories that will last a lifetime. Dinner &amp; dancing await!</p>
-        <a class="btn-outline" href="https://maps.google.com/?q=Le+Royaume+Kleiaat+Lebanon" target="_blank">📍 Get Directions</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══ SECTION 6: FAQ ══ -->
-<section id="faq">
-  <p class="section-eyebrow reveal">Questions &amp; Answers</p>
-  <h2 class="section-title reveal reveal-delay-1">Good to know</h2>
-
-  <div class="faq-wrap reveal reveal-delay-2">
-    <p class="faq-contact">Can't find the answer? <a href="mailto:your-email@example.com?subject=Wedding%20Question">Reach out to Miguel or Olivia</a></p>
-
-    <div class="faq-item">
-      <button class="faq-q" onclick="toggleFaq(this)">
-        <span class="faq-q-text">When should I RSVP by?</span>
-        <span class="faq-icon"></span>
-      </button>
-      <div class="faq-a"><p class="faq-a-inner">Please RSVP by July 9, 2026 so we can finalise numbers with the venue.</p></div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-q" onclick="toggleFaq(this)">
-        <span class="faq-q-text">Is there a dress code?</span>
-        <span class="faq-icon"></span>
-      </button>
-      <div class="faq-a"><p class="faq-a-inner">Yes! We're asking for elegant evening attire. For the ladies: floor-length or cocktail dresses. For the gentlemen: suits or tuxedos. Wear something that makes you feel wonderful and ready to dance!</p></div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-q" onclick="toggleFaq(this)">
-        <span class="faq-q-text">What time should I arrive at the church?</span>
-        <span class="faq-icon"></span>
-      </button>
-      <div class="faq-a"><p class="faq-a-inner">Please plan to arrive at Bkerke Church by 5:45 PM so everyone has time to be seated before the ceremony begins at 6:00 PM.</p></div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-q" onclick="toggleFaq(this)">
-        <span class="faq-q-text">I have a food allergy — can I make a special request?</span>
-        <span class="faq-icon"></span>
-      </button>
-      <div class="faq-a"><p class="faq-a-inner">Absolutely. Please note any allergies or dietary restrictions when you submit your RSVP and we will do our very best to accommodate you.</p></div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-q" onclick="toggleFaq(this)">
-        <span class="faq-q-text">Can I bring a plus-one or my children?</span>
-        <span class="faq-icon"></span>
-      </button>
-      <div class="faq-a"><p class="faq-a-inner">We are keeping the guest list intimate, so plus-ones and children may be limited depending on your invitation. Please reach out if you have questions about your household.</p></div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-q" onclick="toggleFaq(this)">
-        <span class="faq-q-text">Is there parking at the venues?</span>
-        <span class="faq-icon"></span>
-      </button>
-      <div class="faq-a"><p class="faq-a-inner">Parking is available at both Bkerke Church and Le Royaume. We recommend arriving a few minutes early to allow time to park. Rideshare services are also a great option for the reception.</p></div>
-    </div>
-  </div>
 </section>
 
 <!-- ══ SECTION 7: RSVP ══ -->
@@ -1486,7 +1256,7 @@ initStory();
    FIREWORKS
 ══════════════════════════════════════ */
 (function initFireworks() {
-  const dateSection = document.getElementById('date-section');
+  const dateSection = document.getElementById('celebration');
   if (!dateSection) return;
 
   const canvas = document.createElement('canvas');
@@ -1608,31 +1378,39 @@ function initReveal(){
   els.forEach(el=>io.observe(el));
 }
 
-/* ── FAQ ── */
-function toggleFaq(btn){
-  const item = btn.closest('.faq-item');
-  const isOpen = item.classList.contains('open');
-  document.querySelectorAll('.faq-item.open').forEach(i=>i.classList.remove('open'));
-  if(!isOpen) item.classList.add('open');
-}
-
 /* ── DETAIL MODAL ── */
 const MODALS = {
   ceremony:{
     label:'The Ceremony',
     title:'Bkerke Church',
     img:'images/ceremony.jpg',
-    content:`<p><strong>Date:</strong> August 9, 2026 at 6:00 PM</p>
-    <br/><p>Join us as we exchange our vows at the beautiful Bkerke Church, surrounded by the people we love most. Please arrive by 5:45 PM so everyone has time to be seated.</p>
-    <br/><p><a href="https://maps.google.com/?q=Bkerke+Church+Lebanon" target="_blank" style="color:var(--brown)">→ Get directions on Google Maps</a></p>`
+    content:`
+      <p style="font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--bark);margin-bottom:6px;">August 9, 2026 &nbsp;·&nbsp; 6:00 PM</p>
+      <p style="margin-bottom:20px;">Join us as we exchange our vows at Bkerke Church, surrounded by the people we love most. Please plan to arrive by 5:45 PM.</p>
+      <a href="https://maps.google.com/?q=Bkerke+Church+Lebanon" target="_blank"
+         style="display:flex;align-items:center;gap:10px;background:var(--text);color:var(--cream);
+                padding:13px 22px;border-radius:3px;text-decoration:none;
+                font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;
+                justify-content:center;transition:background .2s;"
+         onmouseover="this.style.background='var(--brown)'" onmouseout="this.style.background='var(--text)'">
+        📍 &nbsp; Open in Google Maps
+      </a>`
   },
   reception:{
     label:'The Reception',
     title:'Le Royaume — Kleiaat',
     img:'images/restaurant.jpg',
-    content:`<p><strong>Date:</strong> August 9, 2026 at 9:00 PM</p>
-    <br/><p>Celebrate with us as we dance, laugh, and make memories that will last a lifetime. Dinner and dancing await at the stunning Le Royaume.</p>
-    <br/><p><a href="https://maps.google.com/?q=Le+Royaume+Kleiaat+Lebanon" target="_blank" style="color:var(--brown)">→ Get directions on Google Maps</a></p>`
+    content:`
+      <p style="font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--bark);margin-bottom:6px;">August 9, 2026 &nbsp;·&nbsp; 9:00 PM</p>
+      <p style="margin-bottom:20px;">Celebrate with us as we dance, laugh, and make memories that will last a lifetime. Dinner and dancing await at the stunning Le Royaume.</p>
+      <a href="https://maps.google.com/?q=Le+Royaume+Kleiaat+Lebanon" target="_blank"
+         style="display:flex;align-items:center;gap:10px;background:var(--text);color:var(--cream);
+                padding:13px 22px;border-radius:3px;text-decoration:none;
+                font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;
+                justify-content:center;transition:background .2s;"
+         onmouseover="this.style.background='var(--brown)'" onmouseout="this.style.background='var(--text)'">
+        📍 &nbsp; Open in Google Maps
+      </a>`
   },
   dresscode:{
     label:'Dress Code',
@@ -1645,12 +1423,15 @@ const MODALS = {
   },
   gift:{
     label:'Gift Registry',
-    title:'Gifts',
+    title:'A Little Something',
     img:'',
     content:`<p>The greatest gift we could have is your presence at our celebration.</p>
-    <br/><p>For those who wish to celebrate with a gift, a wedding contribution is available via:</p>
-    <br/><p><strong>Whish Money</strong><br/>+96170234138</p>
-    <br/><p>Thank you so much for your generosity and love.</p>`
+    <br/><p>For those who wish to celebrate with a gift, a wedding contribution is warmly welcome via:</p>
+    <br/><div style="background:var(--cream2);border:1px solid var(--stone);border-radius:4px;padding:18px 20px;text-align:center;">
+      <p style="font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--bark);margin-bottom:6px;">Whish Money</p>
+      <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.3rem;color:var(--text);">+961 70 234 138</p>
+    </div>
+    <br/><p style="text-align:center;font-size:.82rem;color:var(--text2);">Thank you so much for your generosity and love. 💛</p>`
   }
 };
 function openModal(key){
