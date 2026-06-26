@@ -72,10 +72,7 @@ body{
 }
 
 /* ══════════════════════════════════════
-   ENVELOPE INTRO — exact Cordially style
-   Full-screen. Their background image fills
-   the whole screen. Left+right illustrated
-   panels slide off on click.
+   ENVELOPE INTRO
 ══════════════════════════════════════ */
 #envelope-overlay {
   position: fixed;
@@ -83,14 +80,12 @@ body{
   z-index: 9999;
   overflow: hidden;
   cursor: pointer;
-  /* dark bg while images load */
   background: #1a160e;
 }
 #envelope-overlay.done {
   display: none;
 }
 
-/* Full-screen background image */
 #env-bg-img {
   position: absolute;
   inset: 0;
@@ -102,7 +97,6 @@ body{
   display: block;
 }
 
-/* Centre text sits above bg, below panels */
 #env-text {
   position: absolute;
   inset: 0;
@@ -115,7 +109,6 @@ body{
   gap: 0;
   padding: 20px;
   pointer-events: none;
-  /* fade out as panels open */
   transition: opacity 0.3s ease;
 }
 #envelope-overlay.opening #env-text {
@@ -162,7 +155,6 @@ body{
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* Left panel — their actual image, full viewport height */
 #env-panel-l {
   position: absolute;
   top: 0; left: 0; bottom: 0;
@@ -185,7 +177,6 @@ body{
   object-position: right center;
 }
 
-/* Right panel */
 #env-panel-r {
   position: absolute;
   top: 0; right: 0; bottom: 0;
@@ -211,7 +202,6 @@ body{
 /* ══════════════════════════════════════
    SECTIONS — SCROLL-BASED
 ══════════════════════════════════════ */
-/* Fade-up reveal on scroll */
 .reveal{
   opacity:0;transform:translateY(28px);
   transition:opacity .75s ease,transform .75s ease;
@@ -234,19 +224,27 @@ body{
   align-items:center;justify-content:center;
   overflow:hidden;
 }
+
+/* FIX 1: removed background url, added overflow:hidden, added img tag in HTML */
 .hero-bg{
   position:absolute;inset:0;
-  /* extra size so tilt never shows edges */
   width:calc(100% + 60px);
   height:calc(100% + 60px);
   top:-30px;left:-30px;
-  background:url('images/hero.jpg') center/cover no-repeat;
+  overflow:hidden;
   transform-origin:center;
   will-change:transform;
-  /* subtle idle drift while no interaction */
   animation:heroIdleDrift 20s ease-in-out infinite alternate;
   transition:transform .08s linear;
 }
+.hero-bg img{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  object-fit:cover;
+  object-position:center top;
+  display:block;
+}
+
 @keyframes heroIdleDrift{
   0%   { transform:scale(1.04) translate(0px,0px); }
   25%  { transform:scale(1.04) translate(4px,-3px); }
@@ -254,7 +252,6 @@ body{
   75%  { transform:scale(1.04) translate(5px,2px); }
   100% { transform:scale(1.04) translate(-2px,-4px); }
 }
-/* while being tilted, pause the idle drift */
 .hero-bg.tilting { animation-play-state:paused; transition:transform .06s linear; }
 .hero-bg-overlay{
   position:absolute;inset:0;
@@ -293,9 +290,14 @@ body{
   color:rgba(250,247,242,.75);letter-spacing:.12em;
   opacity:0;animation:fadeUp .9s 1.1s forwards;
 }
+
+/* FIX 2: scroll indicator centered reliably on mobile */
 .hero-scroll{
-  position:absolute;bottom:clamp(28px,5vh,48px);left:50%;
-  transform:translateX(-50%);
+  position:absolute;
+  bottom:clamp(28px,5vh,48px);
+  left:0;right:0;
+  width:fit-content;
+  margin:0 auto;
   display:flex;flex-direction:column;align-items:center;gap:8px;
   opacity:0;animation:fadeUp .8s 1.8s forwards;
   cursor:pointer;
@@ -314,36 +316,26 @@ body{
 
 /* ══════════════════════════════════════
    SECTION 2 — OUR STORY
-   Exact Cordially card-stack mechanic:
-   - Section is sticky 100vh
-   - Tall scroll spacer drives progress
-   - Cards slide up from below one by one
-   - All cards remain visible, stacked with
-     unique random tilts like physical photos
 ══════════════════════════════════════ */
 #story-section {
   position: relative;
   background: var(--cream);
 }
 
-/* Sticky viewport */
 #story-sticky-wrap {
   position: sticky;
   top: 0;
   height: 100vh;
-  overflow: hidden; /* hides cards rising from below viewport */
+  overflow: hidden;
   display: flex;
   flex-direction: column;
 }
 
-/* Tall spacer that lives AFTER sticky-wrap, drives animation by making section tall */
 #story-scroll-spacer {
   height: 500vh;
-  /* pointer-events:none so it doesn't block interaction */
   pointer-events: none;
 }
 
-/* Header */
 .story-header {
   flex-shrink: 0;
   text-align: center;
@@ -370,7 +362,6 @@ body{
   letter-spacing: -.03em;
 }
 
-/* Two columns */
 .story-cols {
   flex: 1;
   min-height: 0;
@@ -382,7 +373,6 @@ body{
   .story-cols { grid-template-columns: 160px 1fr; }
 }
 
-/* ── LEFT: chapter text, right-aligned ── */
 .story-text-col {
   display: flex;
   flex-direction: column;
@@ -456,26 +446,21 @@ body{
   line-height: 1.85;
 }
 
-/* ── RIGHT: card stack area ── */
 .story-card-area {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100%;
-  overflow: visible; /* allow tilted card edges to show */
+  overflow: visible;
 }
 
-/* Stack container */
 #story-stack {
   position: relative;
   width: min(68%, 360px);
-  /* height set by JS */
-  /* Extra space so rotated corners don't get clipped */
   margin: 20px;
 }
 
-/* Each card = polaroid print */
 .story-card {
   position: absolute;
   top: 0; left: 0;
@@ -532,7 +517,6 @@ body{
   margin-bottom:clamp(32px,6vh,56px);
 }
 
-/* Countdown */
 .countdown{
   display:flex;align-items:flex-start;justify-content:center;
   gap:clamp(20px,5vw,56px);
@@ -555,7 +539,6 @@ body{
   line-height:1;padding-top:4px;
 }
 
-/* Venue block */
 .venue-block{
   max-width:560px;margin:0 auto;
 }
@@ -580,10 +563,8 @@ body{
 }
 .venue-addr:hover{color:var(--text);border-color:var(--brown)}
 
-/* Fireworks canvas (overlays date section, pointer-events:none so UI still works) */
 #fw-canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:3;}
 
-/* RSVP cta inside date section */
 .date-rsvp-wrap{
   margin-top:clamp(40px,7vh,64px);
   display:flex;flex-direction:column;align-items:center;gap:12px;
@@ -626,7 +607,6 @@ body{
   color:var(--text2);max-width:480px;margin:0 auto;
   margin-bottom:clamp(40px,7vh,72px);
 }
-
 .details-grid{
   display:grid;
   grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));
@@ -665,7 +645,6 @@ body{
 }
 .detail-card-link:hover{color:var(--text)}
 
-/* Details prose */
 .details-prose{
   max-width:660px;margin:clamp(48px,7vh,72px) auto 0;
   text-align:center;
@@ -825,7 +804,6 @@ body{
 }
 .rsvp-msg.show{opacity:1}
 
-/* Admin guest grid */
 .guests-section{width:100%;max-width:800px;margin:0 auto;text-align:left}
 .guests-title{
   font-family:'Cinzel',serif;font-size:clamp(.9rem,2.5vw,1.1rem);
@@ -871,11 +849,21 @@ body{
   overflow:hidden;
   display:flex;align-items:center;justify-content:center;
 }
+
+/* FIX 3: closing bg uses img tag instead of CSS background */
 .closing-bg{
   position:absolute;inset:0;
-  background:url('images/hero.jpg') center 60%/cover no-repeat;
+  overflow:hidden;
   filter:brightness(.55);
 }
+.closing-bg img{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  object-fit:cover;
+  object-position:center 60%;
+  display:block;
+}
+
 .closing-inner{
   position:relative;z-index:2;text-align:center;
   padding:0 clamp(24px,8vw,80px);
@@ -1023,7 +1011,10 @@ footer{
 
 <!-- ══ SECTION 1: HERO ══ -->
 <section id="hero">
-  <div class="hero-bg" id="hero-bg"></div>
+  <!-- FIX 1: img tag instead of CSS background for full resolution on mobile -->
+  <div class="hero-bg" id="hero-bg">
+    <img src="images/hero.jpg" alt="" fetchpriority="high" decoding="sync">
+  </div>
   <div class="hero-bg-overlay"></div>
   <div class="hero-inner">
     <span class="hero-tag">9 · August · 2026</span>
@@ -1031,6 +1022,7 @@ footer{
     <div class="hero-divider"></div>
     <p class="hero-date-line">Together forever begins here</p>
   </div>
+  <!-- FIX 2: scroll indicator uses left:0;right:0;margin:auto for reliable centering -->
   <div class="hero-scroll" onclick="document.getElementById('story-section').scrollIntoView({behavior:'smooth'})">
     <span>Scroll to explore</span>
     <div class="hero-scroll-line"></div>
@@ -1040,10 +1032,8 @@ footer{
 <!-- ══ SECTION 2: OUR STORY ══ -->
 <section id="story-section">
 
-  <!-- Sticky viewport locked to screen -->
   <div id="story-sticky-wrap">
 
-    <!-- Header -->
     <div class="story-header">
       <span class="story-eyebrow">you're cordially invited to celebrate the story of...</span>
       <h2 class="story-main-title">our story</h2>
@@ -1051,7 +1041,6 @@ footer{
 
     <div class="story-cols">
 
-      <!-- LEFT: chapter text -->
       <div class="story-text-col">
         <div class="story-dots">
           <div class="s-dot active" data-ch="0"></div>
@@ -1075,10 +1064,8 @@ footer{
         </div>
       </div>
 
-      <!-- RIGHT: card stack -->
       <div class="story-card-area">
         <div id="story-stack">
-          <!-- Cards in reverse DOM order so first card is on top visually -->
           <div class="story-card" id="sc-8" data-chapter="2">
             <div class="story-card-img"><img src="images/story-9.jpg" alt="Celebrating together" loading="lazy"/></div>
             <span class="story-card-caption">Celebrating together</span>
@@ -1118,10 +1105,9 @@ footer{
         </div>
       </div>
 
-    </div><!-- /story-cols -->
-  </div><!-- /story-sticky-wrap -->
+    </div>
+  </div>
 
-  <!-- Tall scroll spacer — must be OUTSIDE sticky-wrap so it creates scroll room -->
   <div id="story-scroll-spacer"></div>
 
 </section>
@@ -1297,7 +1283,10 @@ footer{
 
 <!-- ══ SECTION 8: CLOSING ══ -->
 <section id="closing">
-  <div class="closing-bg"></div>
+  <!-- FIX 3: img tag instead of CSS background for full resolution on mobile -->
+  <div class="closing-bg">
+    <img src="images/hero.jpg" alt="">
+  </div>
   <div class="closing-inner">
     <p class="closing-quote reveal">"You're my favourite person to do anything with — for the rest of my life."</p>
   </div>
@@ -1337,7 +1326,6 @@ function openEnvelope() {
   const ov = document.getElementById('envelope-overlay');
   if (ov.classList.contains('opening')) return;
   ov.classList.add('opening');
-  /* panels take ~1s to slide. Then hide overlay entirely. */
   setTimeout(() => {
     ov.classList.add('done');
     initReveal();
@@ -1366,15 +1354,7 @@ tick(); setInterval(tick, 1000);
 
 /* ══════════════════════════════════════
    OUR STORY — card-stack mechanic
-   ══════════════════════════════════════
-   BEHAVIOUR:
-   · Cards slide up one by one driven by scroll
-   · Each card lands at a fixed resting position (unique tilt + small offset)
-   · Previous cards NEVER move once landed
-   · All cards remain visible in the stack — the whole pile is seen at once
-   · After the last card there is a "linger" phase (1 extra scroll-height)
-     where the full pile stays on screen before the section ends
-*/
+══════════════════════════════════════ */
 function initStory() {
   const section = document.getElementById('story-section');
   const spacer  = document.getElementById('story-scroll-spacer');
@@ -1387,17 +1367,8 @@ function initStory() {
   const dots  = document.querySelectorAll('.s-dot');
   let activeCh = -1;
 
-  /* ── Fixed resting positions for each card ──────────────────────
-     Card i=0 arrives first (bottom of pile), i=8 arrives last (top).
-     The pile fans visibly: each card has a unique tilt and small
-     positional offset so you can see all cards beneath the top one.
-     Cards are ordered in DOM reverse (sc-8 first in DOM = lowest z),
-     so sc-0 (first to land) sits at the bottom of the visual pile.
-
-     tx/ty in px from the stack origin, rot in degrees.
-     Keep offsets small enough that the whole pile fits in viewport.  */
   const RESTING = [
-    { tx: -18, ty:  12, rot: -6.5 },   // sc-0  — arrived first, deepest
+    { tx: -18, ty:  12, rot: -6.5 },
     { tx:  14, ty:  -8, rot:  5.2 },
     { tx: -10, ty: -14, rot: -3.8 },
     { tx:  20, ty:   6, rot:  7.0 },
@@ -1405,24 +1376,22 @@ function initStory() {
     { tx:  16, ty: -10, rot:  3.2 },
     { tx: -14, ty:  -6, rot: -6.0 },
     { tx:   8, ty:  14, rot:  4.8 },
-    { tx:   0, ty:   0, rot:  0.0 },   // sc-8  — arrived last, always on top, straight
+    { tx:   0, ty:   0, rot:  0.0 },
   ];
 
-  /* Spacer encodes: N card steps + 1 linger step = N+1 total "steps" */
-  const TOTAL_STEPS = N + 1; // last step = linger with full pile visible
+  const TOTAL_STEPS = N + 1;
 
   function easeOutCubic(t) { return 1 - Math.pow(1 - t, 3); }
   function lerp(a, b, t)   { return a + (b - a) * t; }
 
   function resize() {
-    spacer.style.height = (TOTAL_STEPS * 55) + 'vh'; // ~55vh per card step
+    spacer.style.height = (TOTAL_STEPS * 55) + 'vh';
     const h = cards[0] ? cards[0].offsetHeight : 0;
     if (h) stack.style.height = h + 'px';
   }
   resize();
   window.addEventListener('resize', resize);
 
-  /* Chapter text crossfade */
   function setChapter(idx) {
     if (idx === activeCh || idx < 0 || idx > 2) return;
     if (activeCh >= 0 && chs[activeCh]) {
@@ -1445,14 +1414,12 @@ function initStory() {
     });
   });
 
-  /* ── Main scroll handler ── */
   function onScroll() {
     const secTop   = section.offsetTop + window.innerHeight;
     const raw      = (window.scrollY - secTop) / spacer.offsetHeight;
     const progress = Math.max(0, Math.min(1, raw));
 
-    /* Map progress into card steps. Last step is linger — no new card. */
-    const cardFloat = Math.min(progress * TOTAL_STEPS, N); // cap at N (all cards shown)
+    const cardFloat = Math.min(progress * TOTAL_STEPS, N);
     const frontIdx  = Math.min(N - 1, Math.floor(cardFloat));
     const sub       = cardFloat - Math.floor(cardFloat);
     const ease      = easeOutCubic(sub);
@@ -1462,13 +1429,11 @@ function initStory() {
       const rest = RESTING[i];
 
       if (i > frontIdx + 1) {
-        /* Waiting below — fully hidden */
         card.style.cssText = 'transform:translateY(115%);opacity:0;z-index:0;transition:none;';
         return;
       }
 
       if (i === frontIdx + 1) {
-        /* Next card rising — only shows once sub > 0 */
         if (sub < 0.02) {
           card.style.cssText = 'transform:translateY(115%);opacity:0;z-index:0;transition:none;';
         } else {
@@ -1488,8 +1453,7 @@ function initStory() {
         return;
       }
 
-      /* Card has fully landed — FROZEN at its resting position forever */
-      const depth = frontIdx - i; // 0 = current top, higher = deeper in pile
+      const depth = frontIdx - i;
       const z     = N - depth;
 
       card.style.cssText = `
@@ -1502,14 +1466,12 @@ function initStory() {
                     0 1px 3px rgba(0,0,0,.05);
       `;
 
-      /* Swap chapter text at cards 0, 3, 6 */
       if (i === frontIdx && i % 3 === 0) setChapter(i / 3);
     });
 
     if (progress < 0.02) setChapter(0);
   }
 
-  /* Init — all cards hidden below */
   cards.forEach(card => {
     if (card) card.style.cssText = 'transform:translateY(115%);opacity:0;z-index:0;';
   });
@@ -1521,14 +1483,12 @@ function initStory() {
 initStory();
 
 /* ══════════════════════════════════════
-   FIREWORKS — fires when date section
-   enters the viewport
-   ══════════════════════════════════════ */
+   FIREWORKS
+══════════════════════════════════════ */
 (function initFireworks() {
   const dateSection = document.getElementById('date-section');
   if (!dateSection) return;
 
-  /* Create canvas overlay on the date section */
   const canvas = document.createElement('canvas');
   canvas.id = 'fw-canvas';
   canvas.style.cssText = `
@@ -1548,7 +1508,6 @@ initStory();
   resize();
   window.addEventListener('resize', resize);
 
-  /* ── Particle ── */
   class Particle {
     constructor(x, y, color) {
       this.x  = x; this.y = y;
@@ -1572,14 +1531,12 @@ initStory();
       this.alpha -= 0.018;
     }
     draw() {
-      /* trail */
       this.trail.forEach((p, i) => {
         ctx.beginPath();
         ctx.arc(p.x, p.y, this.radius * 0.5, 0, Math.PI * 2);
         ctx.fillStyle = this.color.replace('1)', `${(p.a * i / this.trail.length * 0.4).toFixed(2)})`);
         ctx.fill();
       });
-      /* head */
       ctx.beginPath();
       ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
       ctx.fillStyle = this.color.replace('1)', `${this.alpha.toFixed(2)})`);
@@ -1587,7 +1544,6 @@ initStory();
     }
   }
 
-  /* ── Burst ── */
   const PALETTES = [
     ['rgba(255,215,80,1)', 'rgba(255,180,40,1)', 'rgba(255,240,140,1)'],
     ['rgba(255,120,160,1)','rgba(255,80,120,1)', 'rgba(255,200,220,1)'],
@@ -1604,7 +1560,6 @@ initStory();
     }
   }
 
-  /* ── Launch sequence: 6 bursts staggered ── */
   function launchSequence() {
     if (launched) return;
     launched = true;
@@ -1615,11 +1570,9 @@ initStory();
     positions.forEach(([rx, ry], i) => {
       setTimeout(() => burst(W * rx, H * ry), i * 220);
     });
-    /* Reset launched flag after 8s so re-entering fires them again */
     setTimeout(() => { launched = false; }, 8000);
   }
 
-  /* ── Render loop ── */
   function loop() {
     ctx.clearRect(0, 0, W, H);
     particles = particles.filter(p => p.alpha > 0.02);
@@ -1635,7 +1588,6 @@ initStory();
     if (!animId) animId = requestAnimationFrame(loop);
   }
 
-  /* ── IntersectionObserver triggers fireworks ── */
   const io = new IntersectionObserver(entries => {
     entries.forEach(e => {
       if (e.isIntersecting) {
@@ -1655,8 +1607,6 @@ function initReveal(){
   },{threshold:0.12});
   els.forEach(el=>io.observe(el));
 }
-
-
 
 /* ── FAQ ── */
 function toggleFaq(btn){
@@ -1822,30 +1772,25 @@ if(GUEST_NAME){
 /* ── INIT RSVP ── */
 initRsvp();
 
-/* ── INIT REVEAL (runs after envelope opens, but also on direct load) ── */
+/* ── INIT REVEAL ── */
 initReveal();
 
 /* ════════════════════════════════════════
    HERO PARALLAX — mouse tilt + device gyro
-   The hero background moves as if it's a
-   3D plane tilting toward the pointer / phone tilt.
-   Mouse: image shifts opposite to cursor (parallax depth illusion)
-   Gyro: image shifts with device orientation (β=pitch, γ=roll)
 ════════════════════════════════════════ */
 (function(){
   const bg = document.getElementById('hero-bg');
   const hero = document.getElementById('hero');
   if (!bg || !hero) return;
 
-  const STRENGTH = 18;   /* max pixel shift on each axis */
-  const SCALE    = 1.06; /* always slightly zoomed so edges never show */
+  const STRENGTH = 18;
+  const SCALE    = 1.06;
 
   let targetX = 0, targetY = 0;
   let currentX = 0, currentY = 0;
   let rafId = null;
   let gyroActive = false;
 
-  /* smooth lerp loop */
   function lerp(a, b, t){ return a + (b - a) * t; }
   function tick(){
     currentX = lerp(currentX, targetX, 0.08);
@@ -1856,14 +1801,11 @@ initReveal();
   }
   tick();
 
-  /* ── MOUSE parallax ── */
   hero.addEventListener('mousemove', e => {
     if (gyroActive) return;
     const rect = hero.getBoundingClientRect();
-    /* normalise -1 .. +1 from centre */
     const nx = (e.clientX - rect.left  - rect.width  / 2) / (rect.width  / 2);
     const ny = (e.clientY - rect.top   - rect.height / 2) / (rect.height / 2);
-    /* move image OPPOSITE direction → depth illusion */
     targetX = -nx * STRENGTH;
     targetY = -ny * STRENGTH;
     bg.classList.add('tilting');
@@ -1875,23 +1817,17 @@ initReveal();
     bg.classList.remove('tilting');
   });
 
-  /* ── DEVICE GYROSCOPE (mobile) ── */
   function handleOrientation(e){
     gyroActive = true;
-    /* beta  = front/back tilt  -180..180  (we clamp to ±30) */
-    /* gamma = left/right tilt  -90..90    (we clamp to ±30) */
     const beta  = Math.max(-30, Math.min(30, e.beta  || 0));
     const gamma = Math.max(-30, Math.min(30, e.gamma || 0));
-    /* map ±30° → ±STRENGTH px, invert so image leads the tilt */
     targetX = -(gamma / 30) * STRENGTH;
     targetY = -(beta  / 30) * STRENGTH * 0.5;
     bg.classList.add('tilting');
   }
 
-  /* iOS 13+ requires permission */
   if (typeof DeviceOrientationEvent !== 'undefined'
       && typeof DeviceOrientationEvent.requestPermission === 'function') {
-    /* ask once on first tap */
     document.addEventListener('click', function askGyro(){
       DeviceOrientationEvent.requestPermission()
         .then(state => {
@@ -1904,7 +1840,6 @@ initReveal();
     window.addEventListener('deviceorientation', handleOrientation, { passive: true });
   }
 
-  /* pause animation when tab is hidden */
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) cancelAnimationFrame(rafId);
     else { rafId = requestAnimationFrame(tick); }
