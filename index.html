@@ -577,7 +577,7 @@ body{
 .event-cards{
   display:flex;flex-direction:column;
   gap:clamp(14px,2.5vw,20px);
-  max-width:560px;margin:0 auto clamp(40px,7vh,64px);
+  max-width:560px;margin:0 auto clamp(48px,8vh,80px);
 }
 .event-card{
   position:relative;border-radius:6px;overflow:hidden;
@@ -1005,7 +1005,7 @@ footer{
     <div class="cd-unit"><span class="cd-num" id="cd-s">0</span><span class="cd-label">Seconds</span></div>
   </div>
 
-  <!-- Two tappable event cards -->
+  <!-- Three tappable event cards — ceremony, reception, gift -->
   <div class="event-cards reveal reveal-delay-3">
 
     <!-- Ceremony -->
@@ -1040,10 +1040,7 @@ footer{
       </div>
     </div>
 
-  </div>
-
-  <!-- Gift Registry -->
-  <div class="event-cards reveal reveal-delay-4" style="margin-bottom:clamp(40px,7vh,64px);">
+    <!-- Gift Registry -->
     <div class="event-card" onclick="openModal('gift')">
       <div class="event-card-img">
         <img src="images/gift.jpg" alt="Gift Registry"/>
@@ -1058,12 +1055,13 @@ footer{
         <div class="event-card-cta">✦</div>
       </div>
     </div>
+
   </div>
 
   <!-- RSVP button -->
   <div class="cel-rsvp-wrap reveal reveal-delay-5">
     <a class="btn-primary" href="#rsvp-section">Confirm your attendance</a>
-    <p class="rsvp-deadline">RSVP by July 9, 2026</p>
+    <p class="rsvp-deadline">RSVP by July 22, 2026</p>
   </div>
 
 </section>
