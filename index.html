@@ -186,7 +186,7 @@ body{
 #envelope-overlay.opening #env-panel-l {
   transform: translateX(-100%);
 }
-#env-panel-l img {
+#env-panel-l img:first-child {
   position: absolute;
   top: 0; right: 0;
   height: 100%;
@@ -196,6 +196,23 @@ body{
   object-fit: cover;
   object-position: right center;
   filter: sepia(40%) hue-rotate(-15deg) saturate(120%) brightness(0.82);
+}
+/* Top corner: same image flipped vertically, covers upper 50% */
+#env-panel-l .env-panel-top {
+  position: absolute;
+  bottom: 50%; right: 0;
+  height: 60%;
+  width: auto;
+  max-width: none;
+  display: block;
+  transform: scaleY(-1);
+  transform-origin: bottom right;
+  object-fit: cover;
+  object-position: right bottom;
+  filter: sepia(40%) hue-rotate(-15deg) saturate(130%) brightness(0.78);
+  mask-image: linear-gradient(to bottom, black 0%, black 40%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 0%, black 40%, transparent 100%);
+  z-index: 1;
 }
 #env-panel-l::after {
   content: '';
@@ -219,7 +236,7 @@ body{
 #envelope-overlay.opening #env-panel-r {
   transform: translateX(100%);
 }
-#env-panel-r img {
+#env-panel-r img:first-child {
   position: absolute;
   top: 0; left: 0;
   height: 100%;
@@ -229,6 +246,23 @@ body{
   object-fit: cover;
   object-position: left center;
   filter: sepia(40%) hue-rotate(-15deg) saturate(120%) brightness(0.82);
+}
+/* Top corner: same image flipped vertically, covers upper 50% */
+#env-panel-r .env-panel-top {
+  position: absolute;
+  bottom: 50%; left: 0;
+  height: 60%;
+  width: auto;
+  max-width: none;
+  display: block;
+  transform: scaleY(-1);
+  transform-origin: bottom left;
+  object-fit: cover;
+  object-position: left bottom;
+  filter: sepia(40%) hue-rotate(-15deg) saturate(130%) brightness(0.78);
+  mask-image: linear-gradient(to bottom, black 0%, black 40%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 0%, black 40%, transparent 100%);
+  z-index: 1;
 }
 #env-panel-r::after {
   content: '';
@@ -1005,11 +1039,13 @@ footer{
   <!-- Left illustrated panel -->
   <div id="env-panel-l">
     <img src="images/env-left.png" alt=""/>
+    <img class="env-panel-top" src="images/env-left.png" alt=""/>
   </div>
 
   <!-- Right illustrated panel -->
   <div id="env-panel-r">
     <img src="images/env-right.png" alt=""/>
+    <img class="env-panel-top" src="images/env-right.png" alt=""/>
   </div>
 
 </div>
