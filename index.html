@@ -82,6 +82,14 @@ body{
   cursor: pointer;
   background: #1a160e;
 }
+#envelope-overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(20, 14, 8, 0.52);
+  z-index: 1;
+  pointer-events: none;
+}
 #envelope-overlay.done {
   display: none;
 }
@@ -120,7 +128,8 @@ body{
   font-style: italic;
   font-weight: 300;
   font-size: clamp(1.4rem, 3.5vw, 2.4rem);
-  color: #2a1f14;
+  color: rgba(250, 245, 235, 0.92);
+  text-shadow: 0 2px 20px rgba(0,0,0,.6);
   line-height: 1.3;
   margin-bottom: clamp(24px, 4vh, 40px);
   opacity: 0;
@@ -131,19 +140,30 @@ body{
   font-size: 0.65rem;
   letter-spacing: 0.26em;
   text-transform: uppercase;
-  color: #5a4230;
+  color: rgba(250, 245, 235, 0.9);
   opacity: 0;
   animation: envUp 0.9s 0.8s forwards;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 14px;
+  border: 1px solid rgba(250, 245, 235, 0.45);
+  border-radius: 40px;
+  padding: 12px 28px;
+  background: rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 2px 20px rgba(0,0,0,.3);
+  transition: background .25s, border-color .25s;
+}
+#envelope-overlay:hover .env-click {
+  background: rgba(0,0,0,.38);
+  border-color: rgba(250,245,235,.7);
 }
 .env-click-dot {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: #5a4230;
-  opacity: 0.5;
+  background: rgba(250, 245, 235, 0.7);
+  opacity: 0.7;
   animation: envDotPulse 1.6s 1.4s ease-in-out infinite;
 }
 @keyframes envDotPulse {
@@ -175,6 +195,7 @@ body{
   display: block;
   object-fit: cover;
   object-position: right center;
+  filter: sepia(40%) hue-rotate(-15deg) saturate(120%) brightness(0.82);
 }
 
 #env-panel-r {
@@ -197,6 +218,7 @@ body{
   display: block;
   object-fit: cover;
   object-position: left center;
+  filter: sepia(40%) hue-rotate(-15deg) saturate(120%) brightness(0.82);
 }
 
 /* ══════════════════════════════════════
@@ -947,7 +969,7 @@ footer{
 
   <!-- Full-screen background -->
   <img id="env-bg-img"
-       src="https://www.cordially.io/envelope/garden-fantasy/main-background.png"
+       src="images/hero.jpg"
        alt=""/>
 
   <!-- Centre text -->
