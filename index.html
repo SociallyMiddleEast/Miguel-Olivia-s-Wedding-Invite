@@ -197,6 +197,16 @@ body{
   object-position: right center;
   filter: sepia(40%) hue-rotate(-15deg) saturate(120%) brightness(0.82);
 }
+#env-panel-l::after {
+  content: '';
+  position: absolute;
+  top: -10%; right: 0;
+  width: 100%; height: 65%;
+  background: url('https://www.cordially.io/envelope/garden-fantasy/left-full%201.png') right top / auto 160% no-repeat;
+  filter: sepia(40%) hue-rotate(-15deg) saturate(130%) brightness(0.85);
+  pointer-events: none;
+  z-index: 1;
+}
 
 #env-panel-r {
   position: absolute;
@@ -219,6 +229,16 @@ body{
   object-fit: cover;
   object-position: left center;
   filter: sepia(40%) hue-rotate(-15deg) saturate(120%) brightness(0.82);
+}
+#env-panel-r::after {
+  content: '';
+  position: absolute;
+  top: -10%; left: 0;
+  width: 100%; height: 65%;
+  background: url('https://www.cordially.io/envelope/garden-fantasy/right-full%201.png') left top / auto 160% no-repeat;
+  filter: sepia(40%) hue-rotate(-15deg) saturate(130%) brightness(0.85);
+  pointer-events: none;
+  z-index: 1;
 }
 
 /* ══════════════════════════════════════
