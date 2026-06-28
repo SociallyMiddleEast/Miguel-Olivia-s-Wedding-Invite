@@ -26,7 +26,7 @@
   --white:#ffffff;
   --vh:1vh;
 }
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;scroll-snap-type:y proximity;}
 body{
   background:var(--cream);
   color:var(--text);
@@ -223,6 +223,8 @@ body{
   display:flex;flex-direction:column;
   align-items:center;justify-content:center;
   overflow:hidden;
+  scroll-snap-align:start;
+  scroll-snap-stop:always;
 }
 
 /* FIX 1: removed background url, added overflow:hidden, added img tag in HTML */
@@ -392,20 +394,31 @@ body{
   line-height: .92;
   letter-spacing: -.02em;
   margin-bottom: clamp(10px, 1.5vh, 16px);
+  width: min(560px, 90vw);
+  margin-left: auto;
+  margin-right: auto;
 }
 
-/* Family names row */
+/* Family names row — left col under M of Miguel, right col under a of Olivia */
 .invite-families {
   display: flex;
   align-items: flex-start;
-  justify-content: center;
-  gap: clamp(12px, 3vw, 28px);
-  margin-bottom: clamp(8px, 1.2vh, 14px);
+  justify-content: space-between;
+  width: min(560px, 90vw);
+  margin: 0 auto clamp(8px, 1.2vh, 14px);
 }
 .invite-family-col {
   display: flex;
   flex-direction: column;
   gap: 2px;
+}
+.invite-family-col:first-child {
+  align-items: flex-start;
+  text-align: left;
+}
+.invite-family-col:last-child {
+  align-items: flex-end;
+  text-align: right;
 }
 .invite-parent {
   font-family: 'Cormorant Garamond', serif;
@@ -420,6 +433,7 @@ body{
   font-size: clamp(1rem, 2vw, 1.3rem);
   color: var(--stone);
   padding-top: 2px;
+  align-self: center;
 }
 
 /* Request line */
@@ -609,9 +623,15 @@ body{
 ══════════════════════════════════════ */
 #celebration{
   background:var(--cream);
+  min-height:100vh;
   padding:clamp(80px,12vh,140px) clamp(24px,6vw,80px) clamp(60px,8vh,100px);
   text-align:center;
   position:relative;
+  scroll-snap-align:start;
+  scroll-snap-stop:always;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
 }
 #celebration-bottom{
   background:var(--cream);
@@ -996,7 +1016,6 @@ footer{
         <span class="invite-parent">Edward Faraj</span>
         <span class="invite-parent">Mirna Sebaaly</span>
       </div>
-      <div class="invite-family-sep">·</div>
       <div class="invite-family-col">
         <span class="invite-parent">Roula Sayah</span>
       </div>
@@ -1005,7 +1024,7 @@ footer{
   </div>
 
   <p class="cel-eyebrow reveal">so please join us...</p>
-  <p class="cel-date reveal reveal-delay-1">august 9, 2026</p>
+  <p class="cel-date reveal reveal-delay-1">August 9, 2026</p>
 
   <div class="countdown reveal reveal-delay-2">
     <div class="cd-unit"><span class="cd-num" id="cd-d">0</span><span class="cd-label">Days</span></div>
