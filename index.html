@@ -384,6 +384,13 @@ body{
   margin-bottom: clamp(6px, 1vh, 10px);
 }
 
+/* Wrapper shrinks to rendered width of the title — names align to its edges */
+.invite-title-wrap {
+  display: inline-block;
+  text-align: left;
+  margin-bottom: clamp(8px, 1.2vh, 14px);
+}
+
 /* Main names title */
 .story-main-title {
   font-family: 'Cormorant Garamond', serif;
@@ -393,19 +400,16 @@ body{
   color: var(--text);
   line-height: .92;
   letter-spacing: -.02em;
-  margin-bottom: clamp(10px, 1.5vh, 16px);
-  width: min(560px, 90vw);
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0 0 clamp(6px, 1vh, 10px) 0;
+  white-space: nowrap;
 }
 
-/* Family names row — left col under M of Miguel, right col under a of Olivia */
+/* Family names — spans exactly the title width */
 .invite-families {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  width: min(560px, 90vw);
-  margin: 0 auto clamp(8px, 1.2vh, 14px);
+  width: 100%;
 }
 .invite-family-col {
   display: flex;
@@ -428,13 +432,7 @@ body{
   letter-spacing: .04em;
   display: block;
 }
-.invite-family-sep {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(1rem, 2vw, 1.3rem);
-  color: var(--stone);
-  padding-top: 2px;
-  align-self: center;
-}
+.invite-family-sep { display: none; }
 
 /* Request line */
 .invite-request {
@@ -467,6 +465,7 @@ body{
   }
   .story-main-title {
     font-size: clamp(2.6rem, 14vw, 4.5rem);
+    white-space: normal;
   }
   .story-cols {
     grid-template-columns: 1fr;
@@ -1010,14 +1009,16 @@ footer{
   <div class="story-header reveal">
     <p class="invite-quote">"Where you go I will go, and where you stay I will stay."</p>
     <p class="invite-quote-ref">— Ruth 1:16</p>
-    <h2 class="story-main-title">Miguel &amp; Olivia</h2>
-    <div class="invite-families">
-      <div class="invite-family-col">
-        <span class="invite-parent">Edward Faraj</span>
-        <span class="invite-parent">Mirna Sebaaly</span>
-      </div>
-      <div class="invite-family-col">
-        <span class="invite-parent">Roula Sayah</span>
+    <div class="invite-title-wrap">
+      <h2 class="story-main-title">Miguel &amp; Olivia</h2>
+      <div class="invite-families">
+        <div class="invite-family-col">
+          <span class="invite-parent">Edward Faraj</span>
+          <span class="invite-parent">Mirna Sebaaly</span>
+        </div>
+        <div class="invite-family-col">
+          <span class="invite-parent">Roula Sayah</span>
+        </div>
       </div>
     </div>
     <p class="invite-request">Joyfully request your presence as we celebrate our marriage</p>
