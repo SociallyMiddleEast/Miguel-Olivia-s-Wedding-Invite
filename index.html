@@ -182,22 +182,31 @@ body{
   z-index: 10;
   transition: transform 1s cubic-bezier(0.76, 0, 0.24, 1);
   overflow: hidden;
+}
+#envelope-overlay.opening #env-panel-l { transform: translateX(-100%); }
+
+/* Main flowers — full height, anchored right */
+#env-panel-l::after {
+  content: '';
+  position: absolute;
+  inset: 0;
   background: url('images/env-left.png') right center / auto 100% no-repeat;
   filter: sepia(40%) hue-rotate(-15deg) saturate(120%) brightness(0.82);
 }
-#envelope-overlay.opening #env-panel-l {
-  transform: translateX(-100%);
-}
+
+/* Top flowers — same image flipped, fades out downward */
 #env-panel-l::before {
   content: '';
   position: absolute;
-  top: 0; right: 0;
-  width: 100%; height: 55%;
-  background: url('images/env-left.png') right bottom / auto 100% no-repeat;
+  top: 0; left: 0; right: 0;
+  height: 60%;
+  background: url('images/env-left.png') right bottom / auto 200% no-repeat;
+  filter: sepia(40%) hue-rotate(-15deg) saturate(120%) brightness(0.82);
   transform: scaleY(-1);
-  transform-origin: top right;
-  mask-image: linear-gradient(to bottom, black 0%, black 35%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to bottom, black 0%, black 35%, transparent 100%);
+  transform-origin: top center;
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.6) 40%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.6) 40%, transparent 100%);
+  z-index: 1;
 }
 
 #env-panel-r {
@@ -207,22 +216,31 @@ body{
   z-index: 10;
   transition: transform 1s cubic-bezier(0.76, 0, 0.24, 1) 0.04s;
   overflow: hidden;
+}
+#envelope-overlay.opening #env-panel-r { transform: translateX(100%); }
+
+/* Main flowers — full height, anchored left */
+#env-panel-r::after {
+  content: '';
+  position: absolute;
+  inset: 0;
   background: url('images/env-right.png') left center / auto 100% no-repeat;
   filter: sepia(40%) hue-rotate(-15deg) saturate(120%) brightness(0.82);
 }
-#envelope-overlay.opening #env-panel-r {
-  transform: translateX(100%);
-}
+
+/* Top flowers — same image flipped, fades out downward */
 #env-panel-r::before {
   content: '';
   position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 55%;
-  background: url('images/env-right.png') left bottom / auto 100% no-repeat;
+  top: 0; left: 0; right: 0;
+  height: 60%;
+  background: url('images/env-right.png') left bottom / auto 200% no-repeat;
+  filter: sepia(40%) hue-rotate(-15deg) saturate(120%) brightness(0.82);
   transform: scaleY(-1);
-  transform-origin: top left;
-  mask-image: linear-gradient(to bottom, black 0%, black 35%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to bottom, black 0%, black 35%, transparent 100%);
+  transform-origin: top center;
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.6) 40%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.6) 40%, transparent 100%);
+  z-index: 1;
 }
 
 /* ══════════════════════════════════════
