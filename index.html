@@ -693,7 +693,7 @@ body{
 ══════════════════════════════════════ */
 #celebration{
   background:var(--cream);
-  padding:clamp(48px,6vh,72px) clamp(24px,6vw,80px) 0;
+  padding:clamp(24px,4vh,48px) clamp(24px,6vw,80px) 0;
   text-align:center;
   position:relative;
   display:flex;
@@ -866,6 +866,12 @@ body{
 }
 .btn-primary:hover{background:var(--brown)}
 .rsvp-deadline{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--bark);}
+.rsvp-deadline-inline{
+  font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--bark);
+  margin-bottom:clamp(20px,3vh,28px);
+  display:block;
+}
 
 /* ══════════════════════════════════════
    SECTION 7 — RSVP
@@ -1322,18 +1328,12 @@ footer{
   </div>
 
   <!-- RSVP button -->
-  <div class="cel-rsvp-wrap reveal reveal-delay-5">
-    <a class="btn-primary" href="#rsvp-section">Confirm your attendance</a>
-    <p class="rsvp-deadline">RSVP by July 22, 2026</p>
-  </div>
 
 </section>
 
 <!-- ══ SECTION 7: RSVP ══ -->
 <section id="rsvp-section">
-  <p class="section-eyebrow reveal" style="color:var(--bark)">we cannot wait</p>
-  <h2 class="section-title reveal reveal-delay-1" style="color:var(--text)">Will you join us?</h2>
-  <div id="rsvp-content" class="reveal reveal-delay-2"></div>
+  <div id="rsvp-content" class="reveal reveal-delay-1"></div>
 </section>
 
 <!-- ══ SECTION 8: CLOSING ══ -->
@@ -1874,7 +1874,8 @@ function initRsvp(){
     el.innerHTML = `
       <div class="rsvp-card">
         <p class="rsvp-greeting">Welcome, ${GUEST_NAME}!</p>
-        <p class="rsvp-sub">Will you be joining Miguel &amp; Olivia<br/>on August 9, 2026?</p>
+        <p class="rsvp-sub">Will you be joining us<br/>on August 9, 2026?</p>
+        <p class="rsvp-deadline-inline">Please RSVP by July 22, 2026</p>
         <div class="rsvp-btns">
           <button class="rsvp-btn yes" onclick="rsvpYes()">✓ I'll be there!</button>
           <button class="rsvp-btn no" onclick="rsvpNo()">✗ Can't make it</button>
