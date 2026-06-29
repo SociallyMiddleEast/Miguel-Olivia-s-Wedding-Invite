@@ -26,7 +26,7 @@
   --white:#ffffff;
   --vh:1vh;
 }
-html{scroll-behavior:smooth;scroll-snap-type:y proximity;}
+html{scroll-behavior:smooth;}
 body{
   background:var(--cream);
   color:var(--text);
@@ -267,8 +267,6 @@ body{
   display:flex;flex-direction:column;
   align-items:center;justify-content:center;
   overflow:hidden;
-  scroll-snap-align:start;
-  scroll-snap-stop:always;
 }
 
 /* FIX 1: removed background url, added overflow:hidden, added img tag in HTML */
@@ -698,8 +696,6 @@ body{
   padding:clamp(80px,12vh,140px) clamp(24px,6vw,80px) 0;
   text-align:center;
   position:relative;
-  scroll-snap-align:start;
-  scroll-snap-stop:always;
   display:flex;
   flex-direction:column;
   justify-content:flex-start;
