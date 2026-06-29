@@ -735,7 +735,37 @@ body{
   margin-bottom:clamp(32px,6vh,56px);
 }
 
-.countdown{
+.countdown-label {
+  margin-bottom: clamp(16px, 3vh, 28px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+.countdown-label-the {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(1rem, 2.5vw, 1.3rem);
+  color: var(--text2);
+  letter-spacing: .04em;
+}
+.countdown-label-main {
+  font-family: 'Cinzel', serif;
+  font-weight: 600;
+  font-size: clamp(1.4rem, 5vw, 2.4rem);
+  color: var(--text);
+  letter-spacing: .18em;
+  line-height: 1;
+}
+.countdown-label-sub {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(.9rem, 2.2vw, 1.15rem);
+  color: var(--text2);
+  letter-spacing: .06em;
+}
   display:flex;align-items:flex-start;justify-content:center;
   gap:clamp(20px,5vw,56px);
   margin-bottom:0;
@@ -1111,7 +1141,13 @@ footer{
   <p class="cel-eyebrow reveal">so please join us...</p>
   <p class="cel-date reveal reveal-delay-1">August 9, 2026</p>
 
-  <div class="countdown reveal reveal-delay-2">
+  <div class="countdown-label reveal reveal-delay-2">
+    <p class="countdown-label-the">The</p>
+    <p class="countdown-label-main">COUNTDOWN</p>
+    <p class="countdown-label-sub">to the journey of forever</p>
+  </div>
+
+  <div class="countdown reveal reveal-delay-3">
     <div class="cd-unit"><span class="cd-num" id="cd-d">0</span><span class="cd-label">Days</span></div>
     <span class="cd-sep">:</span>
     <div class="cd-unit"><span class="cd-num" id="cd-h">0</span><span class="cd-label">Hours</span></div>
