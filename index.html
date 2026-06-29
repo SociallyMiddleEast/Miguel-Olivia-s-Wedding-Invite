@@ -771,11 +771,16 @@ body{
   margin-bottom:0;
 }
 .countdown{
-  display:flex;flex-direction:row;align-items:flex-start;justify-content:center;
-  gap:clamp(20px,5vw,56px);
+  display:flex !important;
+  flex-direction:row !important;
+  flex-wrap:nowrap;
+  align-items:flex-start;
+  justify-content:center;
+  gap:clamp(12px,4vw,40px);
   margin-bottom:0;
+  width:100%;
 }
-.cd-unit{display:flex;flex-direction:column;align-items:center;gap:6px}
+.cd-unit{display:flex;flex-direction:column;align-items:center;gap:4px;flex-shrink:0;}
 .cd-num{
   font-family:'Cormorant Garamond',serif;font-weight:300;
   font-size:clamp(2rem,6vw,4rem);
@@ -785,7 +790,11 @@ body{
 .cd-sep{
   font-family:'Cormorant Garamond',serif;
   font-size:clamp(2rem,5vw,3.5rem);
-  color:var(--stone);line-height:1;padding-top:4px;
+  color:var(--stone);
+  line-height:1;
+  padding-top:4px;
+  flex-shrink:0;
+  display:inline-block;
 }
 
 /* ── Event cards ── */
