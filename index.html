@@ -770,6 +770,10 @@ body{
   gap:clamp(20px,5vw,56px);
   margin-bottom:0;
 }
+.countdown-wrap {
+  width: 100%;
+  display: block;
+}
 .countdown{
   display:flex !important;
   flex-direction:row !important;
@@ -1161,14 +1165,16 @@ footer{
     <p class="countdown-label-sub">to the journey of forever</p>
   </div>
 
-  <div class="countdown reveal reveal-delay-3">
-    <div class="cd-unit"><span class="cd-num" id="cd-d">0</span><span class="cd-label">Days</span></div>
-    <span class="cd-sep">:</span>
-    <div class="cd-unit"><span class="cd-num" id="cd-h">0</span><span class="cd-label">Hours</span></div>
-    <span class="cd-sep">:</span>
-    <div class="cd-unit"><span class="cd-num" id="cd-m">0</span><span class="cd-label">Minutes</span></div>
-    <span class="cd-sep">:</span>
-    <div class="cd-unit"><span class="cd-num" id="cd-s">0</span><span class="cd-label">Seconds</span></div>
+  <div class="countdown-wrap reveal reveal-delay-3">
+    <div class="countdown">
+      <div class="cd-unit"><span class="cd-num" id="cd-d">0</span><span class="cd-label">Days</span></div>
+      <span class="cd-sep">:</span>
+      <div class="cd-unit"><span class="cd-num" id="cd-h">0</span><span class="cd-label">Hours</span></div>
+      <span class="cd-sep">:</span>
+      <div class="cd-unit"><span class="cd-num" id="cd-m">0</span><span class="cd-label">Minutes</span></div>
+      <span class="cd-sep">:</span>
+      <div class="cd-unit"><span class="cd-num" id="cd-s">0</span><span class="cd-label">Seconds</span></div>
+    </div>
   </div>
 
   <!-- Love photo below countdown -->
