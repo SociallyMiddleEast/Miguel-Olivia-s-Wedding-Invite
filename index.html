@@ -802,7 +802,82 @@ body{
   display:inline-block;
 }
 
-/* ── Event cards ── */
+/* ── Info cards (no popup — all inline) ── */
+.info-card {
+  background: var(--cream2);
+  border: 1px solid var(--stone);
+  border-radius: 6px;
+  overflow: hidden;
+}
+.info-card-img {
+  width: 100%;
+  aspect-ratio: 16/9;
+  overflow: hidden;
+  background: var(--stone);
+}
+.info-card-img img {
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+  transition: transform .5s ease;
+}
+.info-card:hover .info-card-img img { transform: scale(1.03); }
+.info-card-body {
+  padding: clamp(16px,3vw,28px);
+  text-align: left;
+}
+.info-card-type {
+  font-size: .6rem; letter-spacing: .22em;
+  text-transform: uppercase; color: var(--bark);
+  margin-bottom: 6px;
+}
+.info-card-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic; font-weight: 400;
+  font-size: clamp(1.2rem,3.5vw,1.7rem);
+  color: var(--text); margin-bottom: 4px; line-height: 1.2;
+}
+.info-card-sub {
+  font-size: .78rem; color: var(--text2);
+  letter-spacing: .04em; margin-bottom: 4px;
+}
+.info-card-time {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: clamp(1rem,2.5vw,1.2rem);
+  color: var(--brown); margin-bottom: 10px;
+}
+.info-card-desc {
+  font-size: clamp(.82rem,1.6vw,.92rem);
+  color: var(--text2); line-height: 1.75;
+  margin-bottom: 16px;
+}
+.info-card-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--text); color: var(--cream);
+  padding: 10px 20px; border-radius: 2px;
+  font-size: .68rem; letter-spacing: .16em;
+  text-transform: uppercase; text-decoration: none;
+  transition: background .2s;
+}
+.info-card-btn:hover { background: var(--brown); }
+.info-card-whish {
+  background: var(--cream);
+  border: 1px solid var(--stone);
+  border-radius: 4px;
+  padding: 14px 18px;
+  text-align: center;
+}
+.info-card-whish-label {
+  display: block;
+  font-size: .6rem; letter-spacing: .2em;
+  text-transform: uppercase; color: var(--bark);
+  margin-bottom: 4px;
+}
+.info-card-whish-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic; font-size: 1.4rem;
+  color: var(--text); letter-spacing: .04em;
+}
 .event-cards{
   display:flex;flex-direction:column;
   gap:clamp(14px,2.5vw,20px);
@@ -1274,60 +1349,55 @@ footer{
 <!-- ══ CELEBRATION BOTTOM: VENUES + GIFT + RSVP ══ -->
 <section id="celebration-bottom">
 
-  <!-- Three tappable event cards — ceremony, reception, gift -->
   <div class="event-cards reveal reveal-delay-3">
 
     <!-- Ceremony -->
-    <div class="event-card" onclick="openModal('ceremony')">
-      <div class="event-card-img">
+    <div class="info-card">
+      <div class="info-card-img">
         <img src="images/ceremony.jpg" alt="Lady of Resurrection Church"/>
       </div>
-      <div class="event-card-overlay"></div>
-      <div class="event-card-body">
-        <div class="event-card-info">
-          <p class="event-card-type">The Ceremony</p>
-          <h3 class="event-card-title">Lady of Resurrection Church</h3>
-          <p class="event-card-time">6:00 PM · In the Maronite Patriarchate, Bkerke</p>
-        </div>
-        <div class="event-card-cta">📍</div>
+      <div class="info-card-body">
+        <p class="info-card-type">The Ceremony</p>
+        <h3 class="info-card-title">Lady of Resurrection Church</h3>
+        <p class="info-card-sub">In the Maronite Patriarchate · Bkerke</p>
+        <p class="info-card-time">August 9, 2026 · 6:00 PM</p>
+        <p class="info-card-desc">Join us as we exchange our vows, surrounded by the people we love most. Please arrive by 5:45 PM.</p>
+        <a class="info-card-btn" href="https://maps.google.com/?q=Lady+of+Resurrection+Church+Bkerke+Lebanon" target="_blank">📍 Get Directions</a>
       </div>
     </div>
 
     <!-- Reception -->
-    <div class="event-card" onclick="openModal('reception')">
-      <div class="event-card-img">
+    <div class="info-card">
+      <div class="info-card-img">
         <img src="images/restaurant.jpg" alt="Le Royaume"/>
       </div>
-      <div class="event-card-overlay"></div>
-      <div class="event-card-body">
-        <div class="event-card-info">
-          <p class="event-card-type">The Reception</p>
-          <h3 class="event-card-title">Le Royaume — Kleiaat</h3>
-          <p class="event-card-time">9:00 PM · Tap for directions</p>
-        </div>
-        <div class="event-card-cta">📍</div>
+      <div class="info-card-body">
+        <p class="info-card-type">The Reception</p>
+        <h3 class="info-card-title">Le Royaume — Kleiaat</h3>
+        <p class="info-card-sub">Kleiaat, North Lebanon</p>
+        <p class="info-card-time">August 9, 2026 · 9:00 PM</p>
+        <p class="info-card-desc">Celebrate with us as we dance, laugh, and make memories that will last a lifetime. Dinner and dancing await!</p>
+        <a class="info-card-btn" href="https://maps.google.com/?q=Le+Royaume+Kleiaat+Lebanon" target="_blank">📍 Get Directions</a>
       </div>
     </div>
 
-    <!-- Gift Registry -->
-    <div class="event-card" onclick="openModal('gift')">
-      <div class="event-card-img">
+    <!-- Gift -->
+    <div class="info-card">
+      <div class="info-card-img">
         <img src="images/gift.jpg" alt="Gift Registry"/>
       </div>
-      <div class="event-card-overlay"></div>
-      <div class="event-card-body">
-        <div class="event-card-info">
-          <p class="event-card-type">Gift Registry</p>
-          <h3 class="event-card-title">A Gift of Love</h3>
-          <p class="event-card-time">Whish Account · 30362565</p>
+      <div class="info-card-body">
+        <p class="info-card-type">Gift Registry</p>
+        <h3 class="info-card-title">A Gift of Love</h3>
+        <p class="info-card-desc">The greatest gift we could have is your presence — your laughter, your dancing, your joy filling the room. For those who wish to celebrate with something more, a contribution is warmly treasured.</p>
+        <div class="info-card-whish">
+          <span class="info-card-whish-label">Whish Money</span>
+          <span class="info-card-whish-num">30362565</span>
         </div>
-        <div class="event-card-cta">✦</div>
       </div>
     </div>
 
   </div>
-
-  <!-- RSVP button -->
 
 </section>
 
