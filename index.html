@@ -766,10 +766,6 @@ body{
   color: var(--text2);
   letter-spacing: .06em;
 }
-  display:flex;align-items:flex-start;justify-content:center;
-  gap:clamp(20px,5vw,56px);
-  margin-bottom:0;
-}
 .countdown-wrap {
   width: 100%;
   display: block;
@@ -804,9 +800,9 @@ body{
 /* ── Meeting points (groom & bride houses) ── */
 .meeting-points {
   max-width: 640px;
-  margin: clamp(32px,5vh,56px) auto 0;
-  padding-top: clamp(28px,4vh,44px);
-  border-top: 1px solid var(--stone);
+  margin: 0 auto clamp(32px,5vh,56px);
+  padding-bottom: clamp(28px,4vh,44px);
+  border-bottom: 1px solid var(--stone);
 }
 .meeting-grid {
   display: grid;
@@ -847,6 +843,22 @@ body{
   transition: color .2s;
 }
 .meeting-btn:hover { color: var(--text); }
+
+/* ── Before vows poetic text ── */
+.before-vows {
+  max-width: 520px;
+  margin: 0 auto clamp(40px,6vh,64px);
+  text-align: center;
+}
+.before-vows-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(1.1rem,3vw,1.5rem);
+  color: var(--text2);
+  line-height: 1.9;
+  letter-spacing: .02em;
+}
 
 /* ── Venue blocks (open layout, no card) ── */
 .info-card {
@@ -1397,6 +1409,32 @@ footer{
 <!-- ══ CELEBRATION BOTTOM: VENUES + GIFT + RSVP ══ -->
 <section id="celebration-bottom">
 
+  <!-- Getting Ready — above the ceremony -->
+  <div class="meeting-points reveal">
+    <p class="info-card-type" style="text-align:center;margin-bottom:clamp(16px,3vh,28px);">Getting Ready</p>
+    <div class="meeting-grid">
+      <div class="meeting-item">
+        <p class="meeting-role">The Groom</p>
+        <p class="meeting-name">REPLACE_GROOM_ADDRESS</p>
+        <a class="meeting-btn" href="REPLACE_GROOM_MAPS_LINK" target="_blank">📍 Directions</a>
+      </div>
+      <div class="meeting-item">
+        <p class="meeting-role">The Bride</p>
+        <p class="meeting-name">Ain El Kharoubeh, Metn</p>
+        <a class="meeting-btn" href="https://maps.app.goo.gl/PXpbT1RGWu4xyQCy9" target="_blank">📍 Directions</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Poetic intro text -->
+  <div class="before-vows reveal">
+    <p class="before-vows-text">
+      Before the vows are spoken,<br/>
+      we gather together —<br/>
+      our families, friends, and a beautiful beginning.
+    </p>
+  </div>
+
   <div class="event-cards reveal reveal-delay-3">
 
     <!-- Ceremony -->
@@ -1447,28 +1485,6 @@ footer{
 
   </div>
 
-  <!-- Meeting points -->
-  <div class="meeting-points reveal">
-    <p class="info-card-type" style="text-align:center;margin-bottom:clamp(16px,3vh,28px);">Getting Ready</p>
-    <div class="meeting-grid">
-
-      <!-- Groom -->
-      <div class="meeting-item">
-        <p class="meeting-role">The Groom</p>
-        <p class="meeting-name">REPLACE_GROOM_ADDRESS</p>
-        <a class="meeting-btn" href="REPLACE_GROOM_MAPS_LINK" target="_blank">📍 Directions</a>
-      </div>
-
-      <!-- Bride -->
-      <div class="meeting-item">
-        <p class="meeting-role">The Bride</p>
-        <p class="meeting-name">Ain El Kharoubeh, Metn</p>
-        <a class="meeting-btn" href="https://maps.app.goo.gl/PXpbT1RGWu4xyQCy9" target="_blank">📍 Directions</a>
-      </div>
-
-    </div>
-  </div>
-
 </section>
 
 <!-- ══ SECTION 7: RSVP ══ -->
@@ -1511,7 +1527,7 @@ footer{
 
 /* ── CONFIG ── */
 const WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbwLoOop66_200Xfs6PNETaDu_DLR6Joq6eSuq4Mum8gxEkFuzNOndrf5EEL4I47Sr_B/exec';
-const SITE_URL   = 'https://migueledwardfaraj-eng.github.io/Miguel-Olivia-s-Wedding-Invite/';
+const SITE_URL   = 'https://sociallymiddleeast.github.io/Miguel-Olivia-s-Wedding-Invite/';
 const WA_NUM     = '96170234138';
 const WEDDING    = new Date('2026-08-09T18:00:00');
 const GUEST_NAME = new URLSearchParams(window.location.search).get('guest') || '';
