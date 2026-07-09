@@ -1023,7 +1023,7 @@ function submitAllRsvp(){
   if(attending.length && !declining.length){
     m.textContent = '🎉 Wonderful! We cannot wait to celebrate with you!';
   } else if(!attending.length && declining.length){
-    m.textContent = '💌 We\\'ll miss you! WhatsApp is opening so you can send us a message.';
+    m.textContent = "💌 We'll miss you! WhatsApp is opening so you can send us a message.";
     const msg = encodeURIComponent(`Hi Miguel & Olivia! This is ${GUEST_NAME}. Unfortunately we won't be able to attend your wedding on August 9, 2026. Wishing you all the happiness in the world! 💛`);
     window.open(`https://wa.me/${WA_NUM}?text=${msg}`, '_blank');
   } else {
